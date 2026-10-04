@@ -27,9 +27,11 @@ share/python-wheels/
 MANIFEST
 
 # Data
-#data/raw/*
+data/raw/*
 !data/raw/.gitkeep
-#data/processed/*
+data/processed/*.csv
+data/processed/*.xlsx
+!data/processed/agg/
 !data/processed/.gitkeep
 
 # Environments
