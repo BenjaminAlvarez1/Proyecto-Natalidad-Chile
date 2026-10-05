@@ -42,7 +42,6 @@ fig4 = px.bar(df_educ_f, x="GRUPO_ETARIO_MADRE", y="Nacimientos", color="NIVEL_M
 fig4.update_layout(yaxis=dict(tickformat=",.0f", hoverformat=",.0f"), separators=",.")
 
 st.plotly_chart(fig4, use_container_width=True)
-st.info("**Hallazgo:** Las mujeres con Educación Superior concentran la maternidad entre los 30 y 39 años. Esto refleja un cambio en la planificación familiar: hoy se prioriza la estabilidad profesional y económica antes de la maternidad, desplazando la edad hacia la derecha.")
 
 # 5. Evolución por Nacionalidad (Temporal X, Y)
 st.subheader("5. Impacto de la Nacionalidad en el Tiempo")
@@ -60,4 +59,3 @@ fig5 = px.line(df_nac_top, x='ANO_NAC', y='Nacimientos', color='NACIONALIDAD_MAD
                labels={'ANO_NAC':'Año', 'NACIONALIDAD_MADRE': 'Nacionalidad', 'Nacimientos': 'Total Nacimientos'})
 fig5.update_layout(yaxis=dict(tickformat=",.0f", hoverformat=",.0f"), separators=",.")
 st.plotly_chart(fig5, use_container_width=True)
-st.info("**Hallazgo:** Se observa un crecimiento notorio de madres extranjeras a partir de 2015, amortiguando la caída general de la natalidad en Chile.")

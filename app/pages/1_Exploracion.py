@@ -39,7 +39,6 @@ fig1 = px.line(nac_por_ano, x='ANO_NAC', y='Nacimientos', markers=True,
                labels={'ANO_NAC': 'Año', 'Nacimientos': 'Total Nacimientos'})
 fig1.update_layout(yaxis=dict(tickformat=",.0f", hoverformat=",.0f"), separators=",.")
 st.plotly_chart(fig1, use_container_width=True)
-st.info("**Interpretación:** Se observa una tendencia general a la baja en la natalidad, especialmente marcada en los últimos años.")
 
 col1, col2 = st.columns(2)
 
