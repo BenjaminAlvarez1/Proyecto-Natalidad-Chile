@@ -42,7 +42,7 @@ fig4 = px.bar(df_educ_f, x="GRUPO_ETARIO_MADRE", y="Nacimientos", color="NIVEL_M
 fig4.update_layout(yaxis=dict(tickformat=",.0f", hoverformat=",.0f"), separators=",.")
 
 st.plotly_chart(fig4, use_container_width=True)
-st.info("**Hallazgo:** Las mujeres con mayores niveles educativos (Educación Superior) tienden a concentrar los nacimientos en grupos etarios mayores (30-34 y 35-39 años).")
+st.info("**Hallazgo:** Las mujeres con Educación Superior concentran la maternidad entre los 30 y 39 años. Esto refleja un cambio en la planificación familiar: hoy se prioriza la estabilidad profesional y económica antes de la maternidad, desplazando la edad hacia la derecha.")
 
 # 5. Evolución por Nacionalidad (Temporal X, Y)
 st.subheader("5. Impacto de la Nacionalidad en el Tiempo")
