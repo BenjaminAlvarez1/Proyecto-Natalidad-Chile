@@ -3,8 +3,8 @@ import pandas as pd
 import plotly.express as px
 import os
 
-st.set_page_config(page_title="EDA - Natalidad", page_icon="📈", layout="wide")
-st.title("📈 Análisis Exploratorio de Datos (EDA)")
+st.set_page_config(page_title="EDA - Natalidad", layout="wide")
+st.title("Análisis Exploratorio de Datos (EDA)")
 st.markdown("¿Cómo se comportan nuestros datos a nivel macro?")
 
 agg_dir = "../data/processed/agg/"
@@ -38,7 +38,7 @@ fig1 = px.line(nac_por_ano, x='ANO_NAC', y='Nacimientos', markers=True,
                title="Nacimientos Totales por Año en Chile",
                labels={'ANO_NAC': 'Año', 'Nacimientos': 'Total Nacimientos'})
 st.plotly_chart(fig1, use_container_width=True)
-st.info("💡 **Interpretación:** Se observa una tendencia general a la baja en la natalidad, especialmente marcada en los últimos años.")
+st.info("**Interpretación:** Se observa una tendencia general a la baja en la natalidad, especialmente marcada en los últimos años.")
 
 col1, col2 = st.columns(2)
 

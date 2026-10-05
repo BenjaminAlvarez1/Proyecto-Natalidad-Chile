@@ -2,9 +2,9 @@ import streamlit as st
 import pandas as pd
 import os
 
-st.set_page_config(page_title="Natalidad Chile", page_icon="👶", layout="wide")
+st.set_page_config(page_title="Natalidad Chile", layout="wide")
 
-st.title("👶 Transición Demográfica y Natalidad en Chile")
+st.title("Transición Demográfica y Natalidad en Chile")
 st.subheader("Proyecto 2026-II | EIN092B Visualización")
 
 st.markdown("""
@@ -34,7 +34,7 @@ if os.path.exists("../data/processed/agg/nacimientos_por_mes_ano.csv"):
     df_agg = pd.read_csv("../data/processed/agg/nacimientos_por_mes_ano.csv")
     total = df_agg['Nacimientos'].sum()
     
-    st.markdown("### 📊 Resumen de Datos")
+    st.markdown("### Resumen de Datos")
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Registros Totales", f"{total:,}".replace(',', '.'))
     col2.metric("Periodo", "2001 - 2023")

@@ -3,8 +3,8 @@ import pandas as pd
 import plotly.express as px
 import os
 
-st.set_page_config(page_title="Análisis Pregunta", page_icon="🔍", layout="wide")
-st.title("🔍 Análisis de la Pregunta")
+st.set_page_config(page_title="Análisis Pregunta", layout="wide")
+st.title("Análisis de la Pregunta")
 st.markdown("¿Qué hemos aprendido hasta ahora sobre nuestra pregunta?")
 
 agg_dir = "../data/processed/agg/"
@@ -41,16 +41,21 @@ fig4 = px.bar(df_educ_f, x="GRUPO_ETARIO_MADRE", y="Nacimientos", color="NIVEL_M
               labels={"GRUPO_ETARIO_MADRE": "Grupo Etario", "NIVEL_MADRE": "Nivel Educacional"})
 
 st.plotly_chart(fig4, use_container_width=True)
-st.info("💡 **Hallazgo:** Las mujeres con mayores niveles educativos (Educación Superior) tienden a concentrar los nacimientos en grupos etarios mayores (30-34 y 35-39 años).")
+st.info("**Hallazgo:** Las mujeres con mayores niveles educativos (Educación Superior) tienden a concentrar los nacimientos en grupos etarios mayores (30-34 y 35-39 años).")
 
 # 5. Evolución por Nacionalidad (Temporal X, Y)
 st.subheader("5. Impacto de la Nacionalidad en el Tiempo")
+
+# Mapear códigos de nacionalidad a nombres legibles
+nacionalidad_map = {'C': 'Chilena', 'E': 'Extranjera', 'N': 'Nacionalizada'}
+df_nac['NACIONALIDAD_MADRE'] = df_nac['NACIONALIDAD_MADRE'].map(nacionalidad_map).fillna(df_nac['NACIONALIDAD_MADRE'])
+
 # Simplificar a Top 5
 top_nac = df_nac.groupby('NACIONALIDAD_MADRE')['Nacimientos'].sum().nlargest(5).index
 df_nac_top = df_nac[df_nac['NACIONALIDAD_MADRE'].isin(top_nac)]
 
 fig5 = px.line(df_nac_top, x='ANO_NAC', y='Nacimientos', color='NACIONALIDAD_MADRE', markers=True,
-               title="Evolución de Nacimientos por Nacionalidad (Top 5)",
-               labels={'ANO_NAC':'Año'})
+               title="Evolución de Nacimientos por Nacionalidad",
+               labels={'ANO_NAC':'Año', 'NACIONALIDAD_MADRE': 'Nacionalidad'})
 st.plotly_chart(fig5, use_container_width=True)
-st.info("💡 **Hallazgo:** Se observa un crecimiento notorio de madres de ciertas nacionalidades a partir de 2015, amortiguando la caída general de la natalidad en Chile.")
+st.info("**Hallazgo:** Se observa un crecimiento notorio de madres extranjeras a partir de 2015, amortiguando la caída general de la natalidad en Chile.")
