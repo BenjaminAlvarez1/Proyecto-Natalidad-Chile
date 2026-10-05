@@ -37,6 +37,7 @@ nac_por_ano = df_time_f.groupby('ANO_NAC')['Nacimientos'].sum().reset_index()
 fig1 = px.line(nac_por_ano, x='ANO_NAC', y='Nacimientos', markers=True, 
                title="Nacimientos Totales por Año en Chile",
                labels={'ANO_NAC': 'Año', 'Nacimientos': 'Total Nacimientos'})
+fig1.update_layout(yaxis=dict(tickformat=",.0f", hoverformat=",.0f"))
 st.plotly_chart(fig1, use_container_width=True)
 st.info("**Interpretación:** Se observa una tendencia general a la baja en la natalidad, especialmente marcada en los últimos años.")
 
@@ -47,7 +48,8 @@ with col1:
     st.subheader("2. Distribución por Región")
     nac_region = df_region_f.groupby('GLOSA_REGION_RESIDENCIA')['Nacimientos'].sum().reset_index().sort_values('Nacimientos')
     fig2 = px.bar(nac_region, y='GLOSA_REGION_RESIDENCIA', x='Nacimientos', orientation='h',
-                  title="Nacimientos por Región", labels={'GLOSA_REGION_RESIDENCIA':'Región'})
+                  title="Nacimientos por Región", labels={'GLOSA_REGION_RESIDENCIA':'Región', 'Nacimientos': 'Total Nacimientos'})
+    fig2.update_layout(xaxis=dict(tickformat=",.0f", hoverformat=",.0f"))
     st.plotly_chart(fig2, use_container_width=True)
 
 # 3. Distribución Etaria de la Madre (Barras o KDE aproximado)
@@ -56,5 +58,6 @@ with col2:
     nac_edad = df_edad_f.groupby('GRUPO_ETARIO_MADRE')['Nacimientos'].sum().reset_index()
     fig3 = px.bar(nac_edad, x='GRUPO_ETARIO_MADRE', y='Nacimientos',
                   title="Distribución de Edad de la Madre", 
-                  labels={'GRUPO_ETARIO_MADRE':'Grupo Etario'})
+                  labels={'GRUPO_ETARIO_MADRE':'Grupo Etario', 'Nacimientos': 'Total Nacimientos'})
+    fig3.update_layout(yaxis=dict(tickformat=",.0f", hoverformat=",.0f"))
     st.plotly_chart(fig3, use_container_width=True)

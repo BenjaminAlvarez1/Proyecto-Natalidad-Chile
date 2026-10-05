@@ -38,7 +38,8 @@ df_educ_f['NIVEL_MADRE'] = df_educ_f['NIVEL_MADRE'].astype(str)
 fig4 = px.bar(df_educ_f, x="GRUPO_ETARIO_MADRE", y="Nacimientos", color="NIVEL_MADRE",
               barmode="group",
               title=f"Distribución Educacional vs Edad en {selected_year}",
-              labels={"GRUPO_ETARIO_MADRE": "Grupo Etario", "NIVEL_MADRE": "Nivel Educacional"})
+              labels={"GRUPO_ETARIO_MADRE": "Grupo Etario", "NIVEL_MADRE": "Nivel Educacional", "Nacimientos": "Total Nacimientos"})
+fig4.update_layout(yaxis=dict(tickformat=",.0f", hoverformat=",.0f"))
 
 st.plotly_chart(fig4, use_container_width=True)
 st.info("**Hallazgo:** Las mujeres con mayores niveles educativos (Educación Superior) tienden a concentrar los nacimientos en grupos etarios mayores (30-34 y 35-39 años).")
@@ -47,7 +48,7 @@ st.info("**Hallazgo:** Las mujeres con mayores niveles educativos (Educación Su
 st.subheader("5. Impacto de la Nacionalidad en el Tiempo")
 
 # Mapear códigos de nacionalidad a nombres legibles
-nacionalidad_map = {'C': 'Chilena', 'E': 'Extranjera', 'N': 'Nacionalizada'}
+nacionalidad_map = {'C': 'Chilena', 'E': 'Extranjera', 'N': 'Nacionalizada', 'e': 'Extranjera', 'c': 'Chilena', 'n': 'Nacionalizada'}
 df_nac['NACIONALIDAD_MADRE'] = df_nac['NACIONALIDAD_MADRE'].map(nacionalidad_map).fillna(df_nac['NACIONALIDAD_MADRE'])
 
 # Simplificar a Top 5
@@ -56,6 +57,7 @@ df_nac_top = df_nac[df_nac['NACIONALIDAD_MADRE'].isin(top_nac)]
 
 fig5 = px.line(df_nac_top, x='ANO_NAC', y='Nacimientos', color='NACIONALIDAD_MADRE', markers=True,
                title="Evolución de Nacimientos por Nacionalidad",
-               labels={'ANO_NAC':'Año', 'NACIONALIDAD_MADRE': 'Nacionalidad'})
+               labels={'ANO_NAC':'Año', 'NACIONALIDAD_MADRE': 'Nacionalidad', 'Nacimientos': 'Total Nacimientos'})
+fig5.update_layout(yaxis=dict(tickformat=",.0f", hoverformat=",.0f"))
 st.plotly_chart(fig5, use_container_width=True)
 st.info("**Hallazgo:** Se observa un crecimiento notorio de madres extranjeras a partir de 2015, amortiguando la caída general de la natalidad en Chile.")
